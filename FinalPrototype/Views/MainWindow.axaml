@@ -1,0 +1,79 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:FinalPrototype.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="FinalPrototype.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Title="FinalPrototype">
+    
+    <Grid RowDefinitions="Auto, Auto, Auto"
+          ColumnDefinitions="Auto,Auto"
+          Margin="20">
+        
+        <StackPanel Orientation="Vertical">
+            <Label Content="Select Project:"/>
+            <ListBox ItemsSource="{Binding SelectableProjects}"
+                     SelectedItem="{Binding SelectedProject}"/>
+        </StackPanel>
+        
+        <DataGrid Grid.Row="0" 
+                  Grid.Column="1" 
+                  Margin="15"
+                  CanUserResizeColumns="True"
+                  BorderThickness="1"
+                  BorderBrush="Gray"
+                  GridLinesVisibility="All"
+                  ItemsSource="{Binding Items}"
+                  SelectedItem="{Binding SelectedRow}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Project" Binding="{Binding ProjectId}"/>
+                <DataGridTextColumn Header="1/1" Binding="{Binding FirstEntry}"/>
+                <DataGridTextColumn Header="1/2" Binding="{Binding SecondEntry}"/>
+                <DataGridTextColumn Header="1/3" Binding="{Binding ThirdEntry}"/>
+                <DataGridTextColumn Header="1/4" Binding="{Binding FourthEntry}"/>
+                <DataGridTextColumn Header="1/5" Binding="{Binding FifthEntry}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <Button Grid.Row="1" 
+                Grid.Column="0"
+                Command="{Binding AddLineCommand}">AddLine</Button>
+        
+        <StackPanel Grid.Row="1" 
+                    Grid.Column="1" 
+                    Orientation="Horizontal">
+            <StackPanel Orientation="Vertical"
+                        Margin="10">
+                <Label Content="{Binding TrackTimeString}"/>
+                <Button Content="{Binding StartTimeString}"
+                        CornerRadius="20"
+                        Background="Green"
+                        Margin="5"
+                        Command="{Binding StartTimeCommand}"/>
+                <Button Content="{Binding StopTimeString}"
+                        CornerRadius="20"
+                        Background="Red"
+                        Margin="5"
+                        Command="{Binding StopTimeCommand}"/> 
+            </StackPanel>
+            <StackPanel Orientation="Vertical"
+                        Margin="10">
+                <Label Content="Current time: "/>
+                <Label Content="{Binding Counter}"/>
+            </StackPanel>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="0"
+                    Grid.Row="2"
+                    Orientation="Horizontal"
+                    Grid.ColumnSpan="2"
+                    HorizontalAlignment="Center">
+            <Label Content="Apply current time to date 1/1: "/>
+            <Button Command="{Binding ApplyTimeCommand}"
+                    Content="Apply"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>
